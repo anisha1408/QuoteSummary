@@ -34,10 +34,8 @@
                                 <div class="col-sm-15 input-group">
                                     <input class="form-control" v-model="offerNumber" type="search"
                                         placeholder="Enter Offer Number" aria-label="Search">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" v-on:click="display"><i
+                                    <span class="btn btn-default ainput-group-btn" v-on:click="display"><i
                                                 class="glyphicon glyphicon-search"></i>
-                                        </button>
                                     </span>
                                 </div>
                                 <!-- <div class="form-group">
@@ -238,7 +236,8 @@
                     },
                     display: function (event) {
                         // div.visibility = 'visible';
-
+                        console.log(this.offerNumber);
+                        alert("Hello World");
                         this.loadQuote(this.offerNumber);
                         this.loadCustomer(this.offerNumber);
                         this.loadBuilds(this.offerNumber);
