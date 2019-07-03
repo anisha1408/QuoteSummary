@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css"/>
+<link rel="stylesheet" href="https://fonts.proxy.ustclug.org/css?family=Lato:400,700,400italic,700italic&subset=latin"/>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.0/vue.js"></script> -->
+<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+<link rel="stylesheet" href="https://unpkg.com/vue-material/dist/vue-material.min.css">
+<link rel="stylesheet" href="https://unpkg.com/vue-material/dist/theme/default.css">
+<link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+<link rel="stylesheet"
+    href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+    integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+
+<body class="bg-light" data-spy="scroll">
+    <div id="outer" class="main">
+            
+        <nav class="navbar navbar-light bg-light sticky-top" id="demo">
+            <div class="container-fluid" id="app">
+                <div class="navbar-header" id="it">
+                    <a class="navbar-brand" href="https://www.dell.com/">DELL</a>
+                </div>
+                <div id="large">
+                    <form class="form-inline my-2 my-lg-0">
+                        <div class="pull-right" id="offerNo">
+                            <form class="navbar-form navbar-right" role="search">
+                                <div class="col-sm-15 input-group">
+                                    <input class="form-control" v-model="offerNumber" type="search"
+                                        placeholder="Enter Offer Number" aria-label="Search">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" v-on:click="display"><i
+                                                class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <input class="form-control mr-sm-2" v-model="offerNumber" type="search"
+                                        placeholder="Enter Offer Number" aria-label="Search">
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                                        v-on:click="display" style="border-radius: 8px">Submit</button>
+                                </div> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <br>
+        
+        <br>
+        <div class="container-fluid" text-align: center>
+            <div style="text-align:center">
+            <div class="row" id="hi">
+                <div class="col-sm-12" id="hi">
+
+                    <h1>
+                        <b>
+                            Quote Details
+                        </b>
+                    </h1>
+                </div>
+            </div>
+            <div id="quote" class="col bg-light" id="hi">
+                <div class="row" id="hi">
+                    <div class="col-sm-12">
+                        Offer Number : {{quotes.offerNumber}},
+                        Quote Status :<span style="background-color: rgb(0, 255, 13)" ><b>{{quotes.quoteStatus}}</b></span>,
+                        Offer Date : {{text|subStr}},
+                        Total Selling Price : {{quotes.totalSellingPrice}},
+                        Total Tax : {{quotes.totalTax}}
+
+                    </div>
+                    <!-- <div class="col-sm-6">
+                         Purchase Order Number : {{quotes.purchaseOrderNo}}<br> -->
+                    <!-- Language Code : {{quotes.languageCode}}<br> -->
+                    <!-- Sales Template Flag : {{quotes.salesTemplateFlag}}<br> -->
+                    <!-- Business Segment : {{quotes.businessSegment}}<br> -->
+                    <!-- Total Tax : {{quotes.totalTax}}<br> -->
+
+
+                </div>
+                <!-- </div> -->
+                <!-- </div> -->
+            </div>
+            </div>
+            <br>
+            <br>
+
+
+
+            <!-- <h1>
+                        <b>
+                            Quote Details
+                        </b>
+                    </h1>
+                    <div id="quote" class="col bg-light">
+                        <ul>
+                            <li> Offer Number : {{quotes.offerNumber}}</li>
+                            <li>Source Offer Number : {{quotes.sourceOfferNumber}}</li>
+                            <li>Quote Status : {{quotes.quoteStatus}}</li>
+                            <li>Offer Date : {{quotes.offerDate}}</li>
+                            <li>Purchase Order Number : {{quotes.purchaseOrderNo}}</li>
+                            <li>Language Code : {{quotes.languageCode}}</li>
+                            <li>Sales Template Flag : {{quotes.salesTemplateFlag}}</li>
+                            <li>Is Current : {{quotes.isCurrent}}</li>
+                            <li>Business Segment : {{quotes.businessSegment}}</li>
+                            <li>Total Selling Price : {{quotes.totalSellingPrice}}</li>
+                            <li>Total Tax : {{quotes.totalTax}}</li>
+                        </ul>
+
+                    </div> -->
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="hi" style="text-align: center">
+                        <h1>
+                            <b>
+                                Build Details
+                            </b>
+                        </h1>
+                    </div>
+
+                    <div id="build">
+                        <ul v-for="items in builds">
+                            <li>Offer Number : {{items.offerNo}}</li>
+                            <li>Build Number : {{items.buildNo}}</li>
+                            <li>Quantity : {{items.qty}}</li>
+                            <li>Net Selling Price : {{items.netSellingPrice}}</li>
+                            <li>Build Lines - </li>
+                            <ol>
+                                <li v-for="lines in items.buildLines">
+                                    Offer Number : {{lines.offerNo}}<br>
+                                    Build Number : {{lines.buildNo}}<br>
+                                    Line Number : {{lines.lineNo}} <br>
+                                    Model : {{lines.model}}<br>
+                                    Class: {{lines.class}}<br>
+                                    Sku Number : {{lines.skuNumber}}<br>
+                                    Description : {{lines.description}}<br>
+                                    Quantity : {{lines.qty}}<br>
+                                    Selling Price : {{lines.sellingPrice}}<br>
+                                </li>
+                            </ol>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div id="hi" style="text-align: center">
+                        <h1>
+                            <b>
+                                Customer Details
+                            </b>
+                        </h1>
+                    </div>
+
+                    <div id="cust">
+                        <ul>
+                            <li v-for="item in customer">
+                                Relation Type : {{item.relationType}}<br>
+                                Customer Details - <br>
+                                <ol>
+                                    <li> Customer ID : {{item.customerDetails.customerId}}</li>
+                                    <li>Customer Name : {{item.customerDetails.customerName}}</li>
+                                    <li>Omega Customer Number : {{item.customerDetails.omegaCustomerNumber}}</li>
+                                    <li>Business Segment : {{item.customerDetails.businessSegment}}</li>
+                                    <li>Sales Channel : {{item.customerDetails.salesChannel}}</li>
+                                    <li>Currency Code :{{item.customerDetails.currencyCode}}</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <script>
+            
+
+            new Vue({
+                el: '#outer',
+                data() {
+                    return {
+                        quotes: {},
+                        customer: [],
+                        builds: [],
+                        offerNumber: '',
+                        isquote: true,
+                        iscustomer: true,
+                        isbuild: true,
+                        text: ''
+                    }
+                },
+                filters: {
+
+                    subStr: function (string) {
+                        return string.substring(0, 10);
+                    }
+
+                },
+                methods: {
+                    getInfo: function (event) {
+                        while (isquote == true)
+                            loadQuote();
+
+                    },
+                    loadQuote: function (offerNumber) {
+
+                        axios.get("https://gii-qutoesummary-poc.ausvdc02.pcf.dell.com/api/gb/Quotes/" + offerNumber).then(response => {
+                            this.quotes = response.data;
+                            this.isquote = false;
+                            this.text = response.data.offerDate;
+                        });
+                    },
+                    loadCustomer: function (offerNumber) {
+                        axios.get("https://gii-qutoesummary-poc.ausvdc02.pcf.dell.com/api/gb/customers/" + offerNumber).then(response => {
+                            // console.log(response.data);
+                            this.customer = response.data;
+                            this.iscustomer = false;
+                        });
+                    },
+                    loadBuilds: function (offerNumber) {
+                        axios.get("https://gii-qutoesummary-poc.ausvdc02.pcf.dell.com/api/gb/offers/" + offerNumber + "/builds").then(response => {
+                            // console.log(response.data);
+                            this.builds = response.data;
+                            this.isbuild = false;
+                        });
+                    },
+                    demoVisibility: function () {
+                        document.getElementById("container").style.visibility = "hidden";
+                    },
+                    display: function (event) {
+                        // div.visibility = 'visible';
+
+                        this.loadQuote(this.offerNumber);
+                        this.loadCustomer(this.offerNumber);
+                        this.loadBuilds(this.offerNumber);
+                    }
+                },
+                // mounted() {
+                //     //this.loadQuote(90191240);
+                // }
+            });
+
+        </script>
+        <style>
+            .dot {
+                height: 25px;
+                width: 25px;
+                background-color: green;
+                border-radius: 50%;
+                display: inline-block;
+            }
+
+            .right-inner-addon {
+                position: relative;
+            }
+
+            .right-inner-addon input {
+                padding-right: 30px;
+            }
+
+            .right-inner-addon i {
+                position: absolute;
+                right: 0px;
+                padding: 10px 12px;
+                pointer-events: none;
+            }
+
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 20px;
+            }
+
+            #app {
+                font-size: 20px;
+            }
+
+
+            #hi {
+                text-align: center;
+            }
+
+            /* .form-control{
+            font-size: 20px;
+            text-size-adjust: 20px;
+        } */
+            .col-sm-15 input-group {
+                font-size: 20px;
+            }
+
+            .input {
+                font-size: 40px !important;
+            }
+
+            .navbar-brand {
+                font-size: 20px;
+            }
+
+            .navbar-form navbar-right {
+                font-size: 20px;
+            }
+
+            /* #large{
+            font-size: 20px;
+        } */
+
+            .pull-right {
+                margin-bottom: 0px;
+                font-size: 20px;
+            }
+
+            #it {
+                font-size: 20px;
+            }
+
+            .topnav-right {
+                float: right;
+            }
+
+
+            button {
+                margin-top: 10px;
+            }
+
+            input {
+                text-align: left;
+            }
+
+            .affix {
+                top: 0;
+                width: 60%;
+                z-index: 9999 !important;
+            }
+
+            .loader {
+                border: 16px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 16px solid #3498db;
+                width: 120px;
+                height: 120px;
+                -webkit-animation: spin 2s linear infinite;
+                /* Safari */
+                animation: spin 2s linear infinite;
+            }
+
+
+
+            @-webkit-keyframes spin {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                }
+
+                100% {
+                    -webkit-transform: rotate(360deg);
+                }
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+
+</body>
+
+</html>
